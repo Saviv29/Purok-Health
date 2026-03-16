@@ -1,0 +1,19 @@
+<form
+  (ngSubmit)="onSubmit()"
+  class="flex flex-col gap-2 sm:flex-row items-stretch sm:items-center"
+>
+  <label class="sr-only" for="serviceQuery">Search for medicine or test</label>
+  <input
+    id="serviceQuery"
+    name="serviceQuery"
+    [(ngModel)]="query"
+    placeholder="Search medicine or test (e.g. Dialysis, TB DOTS, X-Ray)"
+    class="flex-1 rounded-md border border-slate-300 px-4 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+  />
+  <button
+    type="submit"
+    class="inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-white shadow hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+  >
+    Search
+  </button>
+</form>

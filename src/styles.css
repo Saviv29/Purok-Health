@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #1f2937;
+  --brand-2: #4f46e5;
+  --muted: #6b7280;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+}
+
+/* Utility classes for availability badges */
+.badge-available {
+  @apply bg-emerald-100 text-emerald-700;
+}
+.badge-warning {
+  @apply bg-amber-100 text-amber-800;
+}
+.badge-unavailable {
+  @apply bg-rose-100 text-rose-700;
+}

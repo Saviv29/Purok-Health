@@ -1,0 +1,15 @@
+<div class="space-y-4">
+  <ng-container *ngIf="facilities.length; else noResults">
+    <div class="grid gap-4 md:grid-cols-2">
+      <app-facility-card
+        *ngFor="let facility of facilities"
+        [facility]="facility"
+        [availability]="getAvailability(facility)"
+      ></app-facility-card>
+    </div>
+  </ng-container>
+
+  <ng-template #noResults>
+    <app-empty-state></app-empty-state>
+  </ng-template>
+</div>
