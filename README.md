@@ -1,59 +1,55 @@
-# PurokHealth
+# Purok-Health
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.2.
+Purok-Health is a service-first healthcare facility finder for Pampanga, Philippines. It helps residents find facilities based on the availability of specific medicines and laboratory services.
 
-## Development server
+## Tech Stack
+- **Frontend:** Angular 21.2 (Standalone, Signals, Router)
+- **Styling:** TailwindCSS 3.4
+- **Backend:** Firebase Firestore
+- **Maps:** OpenStreetMap + Leaflet.js
+- **Environment:** Angular SSR enabled
+- **Testing:** Vitest
 
-To start a local development server, run:
+## Getting Started
 
+### 1. Firebase Setup
+This project requires a Firebase project.
+1. Create a project at [firebase.google.com](https://firebase.google.com/).
+2. Add a Web App and copy the configuration.
+3. Update `src/environments/environment.ts` and `src/environments/environment.prod.ts` with your credentials.
+4. Enable Cloud Firestore in your Firebase console.
+
+### 2. Seeding Data
+To populate your Firestore with initial data:
 ```bash
-ng serve
+npx tsx scripts/seed-firestore.ts
+```
+*Note: Ensure your `environment.ts` is updated first.*
+
+### 3. Development
+Install dependencies:
+```bash
+npm install --legacy-peer-deps
+```
+Run locally:
+```bash
+npm run dev
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### 4. Testing & Build
+Run unit tests:
 ```bash
-ng generate component component-name
+npm run test
+```
+Build for production:
+```bash
+npm run build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Features
+- **Real-time Search:** Debounced search for medicines and services.
+- **Interactive Maps:** Locate facilities using OpenStreetMap.
+- **Mobile Responsive:** Fully functional hamburger menu and fluid layouts.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Social Impact
+Purok-Health is dedicated to empowering communities through better healthcare accessibility. By making facility services and medicine availability transparent, we help residents save time and resources when seeking medical care.

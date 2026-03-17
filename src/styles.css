@@ -3,22 +3,32 @@
 @tailwind utilities;
 
 :root {
-  --brand: #1f2937;
-  --brand-2: #4f46e5;
-  --muted: #6b7280;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
 }
 
-body {
-  @apply bg-slate-50 text-slate-900 antialiased;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-slate-50 text-slate-900;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
 }
 
-/* Utility classes for availability badges */
-.badge-available {
-  @apply bg-emerald-100 text-emerald-700;
-}
-.badge-warning {
-  @apply bg-amber-100 text-amber-800;
-}
-.badge-unavailable {
-  @apply bg-rose-100 text-rose-700;
+@layer components {
+  .fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .badge-available { @apply bg-emerald-100 text-emerald-700 border border-emerald-200; }
+  .badge-warning { @apply bg-orange-100 text-orange-700 border border-orange-200; }
+  .badge-unavailable { @apply bg-rose-100 text-rose-700 border border-rose-200; }
 }

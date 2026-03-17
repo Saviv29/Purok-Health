@@ -1,10 +1,21 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { App } from './app';
+import { Firestore } from '@angular/fire/firestore';
+import { of } from 'rxjs';
 
 describe('App', () => {
+  const firestoreMock = {
+    collection: vi.fn(),
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [
+        provideRouter([]),
+        { provide: Firestore, useValue: firestoreMock }
+      ]
     }).compileComponents();
   });
 
@@ -14,10 +25,10 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render the navigation brand', async () => {
     const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, purok-health');
+    expect(compiled.querySelector('header a')?.textContent).toContain('Purok-Health');
   });
 });

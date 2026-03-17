@@ -17,4 +17,6 @@ export interface Facility {
   services: string[];
   medicines: string[];
   availability: FacilityAvailability;
+  type: 'hospital' | 'clinic' | 'barangay_health_center';
+  operatingHours: string;
 }

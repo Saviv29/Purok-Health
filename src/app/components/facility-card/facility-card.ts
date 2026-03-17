@@ -26,6 +26,24 @@ export class FacilityCard {
     }
   }
 
+  get typeLabel() {
+    switch (this.facility.type) {
+      case 'hospital': return 'Hospital';
+      case 'clinic': return 'Clinic';
+      case 'barangay_health_center': return 'Health Center';
+      default: return 'Facility';
+    }
+  }
+
+  get typeBadgeClass() {
+    switch (this.facility.type) {
+      case 'hospital': return 'bg-indigo-100 text-indigo-700';
+      case 'clinic': return 'bg-blue-100 text-blue-700';
+      case 'barangay_health_center': return 'bg-emerald-100 text-emerald-700';
+      default: return 'bg-slate-100 text-slate-700';
+    }
+  }
+
   get badgeClasses() {
     switch (this.availability) {
       case 'available':

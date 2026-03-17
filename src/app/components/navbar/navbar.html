@@ -1,13 +1,32 @@
-<header class="border-b border-slate-200 bg-white px-4 py-4 shadow-sm">
+<header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-md px-4 py-4 shadow-sm">
   <div class="mx-auto flex max-w-6xl items-center justify-between">
-    <a routerLink="/" class="text-lg font-semibold text-slate-900">
+    <a routerLink="/" class="text-xl font-bold tracking-tight text-indigo-900 flex items-center gap-2">
+      <svg class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
       Purok-Health
     </a>
 
-    <nav class="hidden gap-4 text-sm font-medium text-slate-600 md:flex">
-      <a routerLink="/" class="hover:text-slate-900">Home</a>
-      <a href="#" class="hover:text-slate-900">About</a>
-      <a href="#" class="hover:text-slate-900">Contact</a>
+    <!-- Desktop Nav -->
+    <nav class="hidden gap-8 text-sm font-semibold text-slate-600 md:flex">
+      <a routerLink="/" class="transition hover:text-indigo-600">Home</a>
+      <a routerLink="/about" class="transition hover:text-indigo-600">About</a>
+      <a routerLink="/contact" class="transition hover:text-indigo-600">Contact</a>
     </nav>
+
+    <!-- Mobile Menu Button -->
+    <button (click)="toggleMenu()" class="block md:hidden text-slate-600 hover:text-indigo-600 focus:outline-none">
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path *ngIf="!isMenuOpen()" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        <path *ngIf="isMenuOpen()" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Nav Dropdown -->
+  <div *ngIf="isMenuOpen()" class="mt-4 space-y-2 border-t border-slate-100 pt-4 md:hidden">
+    <a routerLink="/" (click)="isMenuOpen.set(false)" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Home</a>
+    <a routerLink="/about" (click)="isMenuOpen.set(false)" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">About</a>
+    <a routerLink="/contact" (click)="isMenuOpen.set(false)" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Contact</a>
   </div>
 </header>

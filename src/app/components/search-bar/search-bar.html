@@ -6,9 +6,11 @@
   <input
     id="serviceQuery"
     name="serviceQuery"
+    type="text"
     [(ngModel)]="query"
-    placeholder="Search medicine or test (e.g. Dialysis, TB DOTS, X-Ray)"
-    class="flex-1 rounded-md border border-slate-300 px-4 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+    (input)="onInput()"
+    placeholder="Search for medicines (e.g., Paracetamol) or services (e.g., X-Ray)"
+    class="block w-full rounded-l-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 focus:border-indigo-500 focus:ring-indigo-500"
   />
   <button
     type="submit"

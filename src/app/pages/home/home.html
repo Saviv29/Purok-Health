@@ -1,32 +1,32 @@
-<div class="mx-auto max-w-5xl px-4 py-8">
-  <section class="space-y-4">
-    <header class="space-y-2">
-      <h1 class="text-3xl font-semibold text-slate-900">Purok-Health Service Search</h1>
-      <p class="text-sm text-slate-600">
-        Find health facilities in Pampanga by medicine or lab test. Use the filters to narrow your search.
-      </p>
-    </header>
-
-    <app-search-bar (search)="onSearch($event)"></app-search-bar>
-
-    <app-category-filters (select)="onCategory($event)"></app-category-filters>
-  </section>
-
-  <section class="mt-8">
-    <h2 class="text-xl font-semibold text-slate-900">Search results</h2>
-    <p class="mt-1 text-sm text-slate-600">
-      Showing facilities in Pampanga that match your criteria.
+<div class="bg-indigo-900 py-16 text-white sm:py-24 fade-in">
+  <div class="mx-auto max-w-5xl px-4 text-center">
+    <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">Find health facilities in Pampanga</h1>
+    <p class="mt-6 text-lg leading-8 text-indigo-100">
+      Search for available medicines, lab tests, and health services near you. Your health is our priority.
     </p>
+    <div class="mt-10 flex items-center justify-center gap-x-6">
+      <app-search-bar (search)="onSearch($event)" class="w-full max-w-2xl text-slate-900"></app-search-bar>
+    </div>
+  </div>
+</div>
 
-    <div class="mt-4">
-      <app-results-list
-        [facilities]="results()"
-        [availabilityOverrides]="availabilityOverrides"
-      ></app-results-list>
+<div class="mx-auto max-w-5xl px-4 py-12 fade-in">
+  <section>
+    <div class="flex items-center justify-between mb-2">
+      <h2 class="text-xl font-semibold text-slate-900">Explore by Category</h2>
+    </div>
+
+    <div class="mt-6">
+      <app-category-filters (select)="onCategory($event)"></app-category-filters>
     </div>
   </section>
 
-  <section class="mt-10">
-    <app-status-mock-controller></app-status-mock-controller>
+  <section class="mt-12">
+    <div class="mt-4">
+      <app-results-list
+        [facilities]="facilities()"
+        [loading]="isLoading()"
+      ></app-results-list>
+    </div>
   </section>
 </div>

@@ -1,79 +1,96 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Firestore, collection, onSnapshot, Unsubscribe, query } from '@angular/fire/firestore';
 import { computed, signal, Signal } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Facility } from '../models/facility';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FacilityService {
-  private readonly http = inject(HttpClient);
+  private readonly firestore = inject(Firestore);
+  private readonly facilitiesCollection = collection(this.firestore, 'facilities');
 
-  private readonly facilitiesSignal = signal<Facility[]>([]);
+  // Search state
+  readonly searchQuery = signal('');
+  readonly selectedCategory = signal('');
 
-  private readonly availabilityOverrideSignal = signal<Record<string, Facility['availability']>>({});
+  // Facilities raw signal from Firestore
+  // Manual observable using onSnapshot to avoid collectionData type issues
+  private readonly facilitiesRaw = toSignal(
+    new Observable<Facility[]>((subscriber) => {
+      console.log('FacilityService: Setting up Firestore listener...');
+      // Wrapping with query() often fixes the "Expected type '_Query'" error
+      const unsubscribe: Unsubscribe = onSnapshot(
+        query(this.facilitiesCollection),
+        (snapshot) => {
+          const facilities = snapshot.docs.map(
+            (doc) => ({ id: doc.id, ...doc.data() } as Facility)
+          );
+          console.log(`FacilityService: ${facilities.length} facilities synced`);
+          subscriber.next(facilities);
+        },
+        (error) => {
+          console.error('FacilityService: Firestore listener error:', error);
+          subscriber.error(error);
+        }
+      );
 
-  constructor() {
-    this.loadFacilities();
-  }
+      return () => {
+        console.log('FacilityService: Unsubscribing from Firestore');
+        unsubscribe();
+      };
+    }),
+    { initialValue: undefined }
+  );
 
-  private loadFacilities() {
-    this.http
-      .get<Facility[]>('assets/mock-facilities.json')
-      .subscribe((data) => this.facilitiesSignal.set(data));
-  }
+  // Loading state: true until the first emission from Firestore
+  readonly isLoading = computed(() => this.facilitiesRaw() === undefined);
 
-  get facilities(): Signal<Facility[]> {
-    return this.facilitiesSignal;
-  }
+  // Computed signal for filtered results
+  readonly facilities = computed(() => {
+    const raw = this.facilitiesRaw() || [];
+    const filterText = this.searchQuery().toLowerCase().trim();
+    const category = this.selectedCategory().toLowerCase().trim();
 
-  get availabilityOverrides(): Signal<Record<string, Facility['availability']>> {
-    return this.availabilityOverrideSignal;
-  }
+    if (!filterText && !category) {
+      return raw;
+    }
 
-  /**
-   * Returns the facility list with optional filter by query and category.
-   */
-  search(query: string, category?: string): Signal<Facility[]> {
-    return computed(() => {
-      const raw = this.facilitiesSignal();
-      if (!query && !category) {
-        return raw;
-      }
+    return raw.filter((f) => {
+      const name = (f.name || '').toLowerCase();
+      const city = (f.location?.city || '').toLowerCase();
+      const services = (f.services || []).map((s) => s.toLowerCase());
+      const medicines = (f.medicines || []).map((m) => m.toLowerCase());
+      const type = (f.type || '').toLowerCase();
 
-      const lowerQuery = query.trim().toLowerCase();
-      const lowerCategory = category?.trim().toLowerCase();
+      const matchesQuery =
+        !filterText ||
+        name.includes(filterText) ||
+        city.includes(filterText) ||
+        services.some((s) => s.includes(filterText)) ||
+        medicines.some((m) => m.includes(filterText));
 
-      return raw.filter((facility) => {
-        const matchesCategory = lowerCategory
-          ? facility.services.some((s) => s.toLowerCase().includes(lowerCategory)) ||
-            facility.medicines.some((m) => m.toLowerCase().includes(lowerCategory))
-          : true;
+      const matchesCategory =
+        !category ||
+        type.includes(category) ||
+        services.some((s) => s.includes(category)) ||
+        medicines.some((m) => m.includes(category));
 
-        const matchesQuery = lowerQuery
-          ? facility.services.some((s) => s.toLowerCase().includes(lowerQuery)) ||
-            facility.medicines.some((m) => m.toLowerCase().includes(lowerQuery)) ||
-            facility.name.toLowerCase().includes(lowerQuery)
-          : true;
-
-        return matchesCategory && matchesQuery;
-      });
+      return matchesQuery && matchesCategory;
     });
+  });
+
+  setSearch(query: string) {
+    this.searchQuery.set(query);
+  }
+
+  setCategory(category: string) {
+    this.selectedCategory.set(category);
   }
 
   getFacilityById(id: string): Signal<Facility | undefined> {
-    return computed(() => this.facilitiesSignal().find((f) => f.id === id));
-  }
-
-  setAvailabilityOverride(facilityId: string, availability: Facility['availability']) {
-    this.availabilityOverrideSignal.update((state) => ({
-      ...state,
-      [facilityId]: availability,
-    }));
-  }
-
-  getAvailability(facility: Facility): Facility['availability'] {
-    return this.availabilityOverrideSignal()[facility.id] ?? facility.availability;
+    return computed(() => this.facilities().find((f) => f.id === id));
   }
 }

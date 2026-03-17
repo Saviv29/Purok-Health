@@ -1,38 +1,30 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { inject, Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { FacilityService } from '../../services/facility.service';
 import { CategoryFilters } from '../../components/category-filters/category-filters';
-import { ResultsList } from '../../components/results-list/results-list';
 import { SearchBar } from '../../components/search-bar/search-bar';
-import { StatusMockController } from '../../components/status-mock-controller/status-mock-controller';
+import { ResultsList } from '../../components/results-list/results-list';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, SearchBar, CategoryFilters, ResultsList, StatusMockController],
+  imports: [CommonModule, RouterModule, CategoryFilters, SearchBar, ResultsList],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home {
-  query = signal('');
-  category = signal('');
+  private facilityService = inject(FacilityService);
 
-  constructor(private readonly facilityService: FacilityService) {}
-
-  results = computed(() => {
-    return this.facilityService.search(this.query(), this.category())();
-  });
-
-  get availabilityOverrides() {
-    return this.facilityService.availabilityOverrides();
-  }
+  facilities = this.facilityService.facilities;
+  isLoading = this.facilityService.isLoading;
 
   onSearch(query: string) {
-    this.query.set(query);
+    this.facilityService.setSearch(query);
   }
 
   onCategory(category: string) {
-    this.category.set(category);
+    this.facilityService.setCategory(category);
   }
 }

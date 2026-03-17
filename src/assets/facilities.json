@@ -1,0 +1,138 @@
+[
+  {
+    "name": "Purok Health Center - Pampanga",
+    "address": "123 Barangay Main St, San Fernando, Pampanga",
+    "phone": "+63 912 345 6789",
+    "email": "info@purokhealth.ph",
+    "location": {
+      "city": "San Fernando",
+      "province": "Pampanga",
+      "latitude": 15.0340,
+      "longitude": 120.6869
+    },
+    "services": ["Dialysis", "X-Ray", "TB DOTS", "General Consultation", "Vaccinations"],
+    "medicines": ["Paracetamol", "Amoxicillin", "Anti-TB regimen", "Insulin"],
+    "availability": "available",
+    "type": "barangay_health_center",
+    "operatingHours": "Mon-Fri 8AM-5PM"
+  },
+  {
+    "name": "Angeles City General Hospital",
+    "address": "45 Rizal St, Angeles City, Pampanga",
+    "phone": "+63 912 987 6543",
+    "email": "acgh@purokhealth.ph",
+    "location": {
+      "city": "Angeles",
+      "province": "Pampanga",
+      "latitude": 15.1390,
+      "longitude": 120.5851
+    },
+    "services": ["Animal Bite Treatment", "Vaccinations", "Emergency Care", "Laboratory Services", "Surgeries"],
+    "medicines": ["Anti-rabies", "Tetanus vaccine", "Amoxicillin", "Epinephrine"],
+    "availability": "limited",
+    "type": "hospital",
+    "operatingHours": "24/7"
+  },
+  {
+    "name": "Central Mabalacat Clinic",
+    "address": "88 Wellness Ave, Mabalacat, Pampanga",
+    "phone": "+63 917 000 1122",
+    "email": "mabalacat@purokhealth.ph",
+    "location": {
+      "city": "Mabalacat",
+      "province": "Pampanga",
+      "latitude": 15.1628,
+      "longitude": 120.5899
+    },
+    "services": ["X-Ray", "Laboratory Services", "General Consultation"],
+    "medicines": ["Paracetamol", "Ibuprofen", "Vitamins"],
+    "availability": "unavailable",
+    "type": "clinic",
+    "operatingHours": "Mon-Sat 9AM-8PM"
+  },
+  {
+    "name": "Guagua District Hospital",
+    "address": "San Roque, Guagua, Pampanga",
+    "phone": "+63 918 111 2233",
+    "email": "guagua@purokhealth.ph",
+    "location": {
+      "city": "Guagua",
+      "province": "Pampanga",
+      "latitude": 14.9667,
+      "longitude": 120.6333
+    },
+    "services": ["Dialysis", "Maternity", "General Consultation"],
+    "medicines": ["Oxytocin", "Amoxicillin", "Paracetamol"],
+    "availability": "available",
+    "type": "hospital",
+    "operatingHours": "24/7"
+  },
+  {
+    "name": "Apalit Community Clinic",
+    "address": "Poblacion, Apalit, Pampanga",
+    "phone": "+63 919 444 5566",
+    "email": "apalit@purokhealth.ph",
+    "location": {
+      "city": "Apalit",
+      "province": "Pampanga",
+      "latitude": 14.95,
+      "longitude": 120.7667
+    },
+    "services": ["Vaccinations", "Dental", "General Consultation"],
+    "medicines": ["Fluoride", "Paracetamol"],
+    "availability": "available",
+    "type": "clinic",
+    "operatingHours": "Mon-Fri 8AM-4PM"
+  },
+  {
+    "name": "Magalang Health Unit",
+    "address": "San Nicolas 1st, Magalang, Pampanga",
+    "phone": "+63 920 777 8899",
+    "email": "magalang@purokhealth.ph",
+    "location": {
+      "city": "Magalang",
+      "province": "Pampanga",
+      "latitude": 15.2167,
+      "longitude": 120.6667
+    },
+    "services": ["TB DOTS", "Prenatal", "General Consultation"],
+    "medicines": ["Anti-TB regimen", "Iron supplements"],
+    "availability": "limited",
+    "type": "barangay_health_center",
+    "operatingHours": "Mon-Fri 7AM-3PM"
+  },
+  {
+    "name": "Porac Wellness Center",
+    "address": "Cangatba, Porac, Pampanga",
+    "phone": "+63 921 000 1111",
+    "email": "porac@purokhealth.ph",
+    "location": {
+      "city": "Porac",
+      "province": "Pampanga",
+      "latitude": 15.0667,
+      "longitude": 120.5333
+    },
+    "services": ["Physical Therapy", "General Consultation"],
+    "medicines": ["Ibuprofen", "Diclofenac"],
+    "availability": "available",
+    "type": "clinic",
+    "operatingHours": "Mon-Sat 10AM-6PM"
+  },
+  {
+    "name": "Lubao Municipal Infirmary",
+    "address": "Sta. Cruz, Lubao, Pampanga",
+    "phone": "+63 922 222 3333",
+    "email": "lubao@purokhealth.ph",
+    "location": {
+      "city": "Lubao",
+      "province": "Pampanga",
+      "latitude": 14.9333,
+      "longitude": 120.6
+    },
+    "services": ["Animal Bite Treatment", "Emergency Care", "Laboratory Services"],
+    "medicines": ["Anti-rabies", "Oral Rehydration Salts"],
+    "availability": "available",
+    "type": "hospital",
+    "operatingHours": "24/7"
+  }
+]
