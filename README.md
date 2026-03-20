@@ -19,14 +19,7 @@ This project requires a Firebase project.
 3. Update `src/environments/environment.ts` and `src/environments/environment.prod.ts` with your credentials.
 4. Enable Cloud Firestore in your Firebase console.
 
-### 2. Seeding Data
-To populate your Firestore with initial data:
-```bash
-npx tsx scripts/seed-firestore.ts
-```
-*Note: Ensure your `environment.ts` is updated first.*
-
-### 3. Development
+### 2. Development
 Install dependencies:
 ```bash
 npm install --legacy-peer-deps
