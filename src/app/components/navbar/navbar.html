@@ -17,16 +17,21 @@
     <!-- Mobile Menu Button -->
     <button (click)="toggleMenu()" class="block md:hidden text-slate-600 hover:text-indigo-600 focus:outline-none">
       <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path *ngIf="!isMenuOpen()" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-        <path *ngIf="isMenuOpen()" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        @if (!isMenuOpen()) {
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        } @else {
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        }
       </svg>
     </button>
   </div>
 
   <!-- Mobile Nav Dropdown -->
-  <div *ngIf="isMenuOpen()" class="mt-4 space-y-2 border-t border-slate-100 pt-4 md:hidden">
-    <a routerLink="/" (click)="isMenuOpen.set(false)" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Home</a>
-    <a routerLink="/about" (click)="isMenuOpen.set(false)" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">About</a>
-    <a routerLink="/contact" (click)="isMenuOpen.set(false)" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Contact</a>
-  </div>
+  @if (isMenuOpen()) {
+    <div class="mt-4 space-y-2 border-t border-slate-100 pt-4 md:hidden">
+      <a routerLink="/" (click)="isMenuOpen.set(false)" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Home</a>
+      <a routerLink="/about" (click)="isMenuOpen.set(false)" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">About</a>
+      <a routerLink="/contact" (click)="isMenuOpen.set(false)" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Contact</a>
+    </div>
+  }
 </header>

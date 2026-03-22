@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
+import { Component, output, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   styleUrl: './search-bar.css',
 })
 export class SearchBar implements OnInit, OnDestroy {
-  @Output() search = new EventEmitter<string>();
+  search = output<string>();
 
   query = '';
   private searchSubject = new Subject<string>();

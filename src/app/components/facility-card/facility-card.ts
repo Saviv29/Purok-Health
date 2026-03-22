@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { SlicePipe } from '@angular/common';
+import { Component, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { Facility, FacilityAvailability } from '../../models/facility';
@@ -7,16 +7,16 @@ import { Facility, FacilityAvailability } from '../../models/facility';
 @Component({
   selector: 'app-facility-card',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule, SlicePipe],
   templateUrl: './facility-card.html',
   styleUrl: './facility-card.css',
 })
 export class FacilityCard {
-  @Input() facility!: Facility;
-  @Input() availability: FacilityAvailability = 'available';
+  facility = input.required<Facility>();
+  availability = input<FacilityAvailability>('available');
 
   get availabilityLabel() {
-    switch (this.availability) {
+    switch (this.availability()) {
       case 'available':
         return 'Available';
       case 'limited':
@@ -27,7 +27,7 @@ export class FacilityCard {
   }
 
   get typeLabel() {
-    switch (this.facility.type) {
+    switch (this.facility().type) {
       case 'hospital': return 'Hospital';
       case 'clinic': return 'Clinic';
       case 'barangay_health_center': return 'Health Center';
@@ -36,7 +36,7 @@ export class FacilityCard {
   }
 
   get typeBadgeClass() {
-    switch (this.facility.type) {
+    switch (this.facility().type) {
       case 'hospital': return 'bg-indigo-100 text-indigo-700';
       case 'clinic': return 'bg-blue-100 text-blue-700';
       case 'barangay_health_center': return 'bg-emerald-100 text-emerald-700';
@@ -45,13 +45,15 @@ export class FacilityCard {
   }
 
   get badgeClasses() {
-    switch (this.availability) {
+    switch (this.availability()) {
       case 'available':
         return 'badge-available';
       case 'limited':
         return 'badge-warning';
       case 'unavailable':
         return 'badge-unavailable';
+      default:
+        return '';
     }
   }
 }
