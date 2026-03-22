@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { inject, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -10,7 +9,7 @@ import { ResultsList } from '../../components/results-list/results-list';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, CategoryFilters, SearchBar, ResultsList],
+  imports: [RouterModule, CategoryFilters, SearchBar, ResultsList],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

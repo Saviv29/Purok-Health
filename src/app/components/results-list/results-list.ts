@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { Component, input, inject } from '@angular/core';
 
 import { Facility } from '../../models/facility';
 import { FacilityService } from '../../services/facility.service';
@@ -10,14 +9,14 @@ import { LoadingSkeleton } from '../loading-skeleton/loading-skeleton';
 @Component({
   selector: 'app-results-list',
   standalone: true,
-  imports: [CommonModule, FacilityCard, EmptyState, LoadingSkeleton],
+  imports: [FacilityCard, EmptyState, LoadingSkeleton],
   templateUrl: './results-list.html',
   styleUrl: './results-list.css',
 })
 export class ResultsList {
   protected readonly facilityService = inject(FacilityService);
-  @Input() facilities: Facility[] = [];
-  @Input() loading = false;
+  facilities = input<Facility[]>([]);
+  loading = input<boolean>(false);
 
   getAvailability(facility: Facility): string {
     return facility.availability;

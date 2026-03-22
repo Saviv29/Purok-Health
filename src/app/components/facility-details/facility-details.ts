@@ -1,5 +1,5 @@
 import { inject, Component, computed, signal, AfterViewInit, PLATFORM_ID, effect } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import { FacilityService } from '../../services/facility.service';
@@ -8,7 +8,7 @@ import { Facility } from '../../models/facility';
 @Component({
   selector: 'app-facility-details',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   templateUrl: './facility-details.html',
   styleUrl: './facility-details.css',
 })

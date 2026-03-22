@@ -1,32 +1,37 @@
 <div class="space-y-6">
   <div class="flex items-center justify-between">
     <h2 class="text-xl font-semibold text-slate-900">
-      {{ loading ? 'Searching facilities...' : 'Search Results' }}
+      {{ loading() ? 'Searching facilities...' : 'Search Results' }}
     </h2>
-    <span class="text-sm text-slate-500" *ngIf="!loading && facilities.length > 0">
-      {{ facilities.length }} found
-    </span>
+    @if (!loading() && facilities().length > 0) {
+      <span class="text-sm text-slate-500">
+        {{ facilities().length }} found
+      </span>
+    }
   </div>
 
   <!-- Loading State -->
-  <app-loading-skeleton *ngIf="loading"></app-loading-skeleton>
+  @if (loading()) {
+    <app-loading-skeleton></app-loading-skeleton>
+  }
 
   <!-- Results -->
-  <div *ngIf="!loading">
-    <div *ngIf="facilities.length > 0; else empty" class="grid gap-4 md:grid-cols-2">
-      <app-facility-card
-        *ngFor="let facility of facilities"
-        [facility]="facility"
-        [availability]="facility.availability"
-        class="h-full"
-      ></app-facility-card>
-    </div>
-  </div>
-
-  <ng-template #empty>
-    <app-empty-state 
-      [query]="facilityService.searchQuery()" 
-      [category]="facilityService.selectedCategory()">
-    </app-empty-state>
-  </ng-template>
+  @if (!loading()) {
+    @if (facilities().length > 0) {
+      <div class="grid gap-4 md:grid-cols-2">
+        @for (facility of facilities(); track facility.id) {
+          <app-facility-card
+            [facility]="facility"
+            [availability]="facility.availability"
+            class="h-full"
+          ></app-facility-card>
+        }
+      </div>
+    } @else {
+      <app-empty-state
+        [query]="facilityService.searchQuery()"
+        [category]="facilityService.selectedCategory()">
+      </app-empty-state>
+    }
+  }
 </div>

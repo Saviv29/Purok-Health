@@ -1,14 +1,13 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-empty-state',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './empty-state.html',
   styleUrl: './empty-state.css',
 })
 export class EmptyState {
-  @Input() query = '';
-  @Input() category = '';
+  query = input('');
+  category = input('');
 }

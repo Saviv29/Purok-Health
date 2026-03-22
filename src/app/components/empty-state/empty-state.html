@@ -6,7 +6,7 @@
   </div>
   <h3 class="mt-4 text-lg font-semibold text-slate-900">No facilities found</h3>
   <p class="mt-2 text-sm text-slate-600 max-w-sm">
-    We couldn't find any results for <span class="font-bold text-slate-900">"{{ query || category }}"</span>.
+    We couldn't find any results for <span class="font-bold text-slate-900">"{{ query() || category() }}"</span>.
     Try adjusting your search terms or filters.
   </p>
 </div>
